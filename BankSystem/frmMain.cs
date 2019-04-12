@@ -29,14 +29,16 @@ namespace BankSystem
         {
             using (frmAccount newForm = new frmAccount())
             {
+                newForm.Text = "Pridaj účet";
                 newForm.ShowDialog();
             }
         }
 
         private void cmdAllAccounts_Click(object sender, EventArgs e)
         {
-            using (frmAccounts newForm = new frmAccounts())
+            using (frmAccounts newForm = new frmAccounts(new frmAccountsViewModel()))
             {
+                
                 newForm.ShowDialog();
             }
         }

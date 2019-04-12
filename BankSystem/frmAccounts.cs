@@ -12,8 +12,11 @@ namespace BankSystem
 {
     public partial class frmAccounts : Form
     {
-        public frmAccounts()
+        private frmAccountsViewModel _frmAccountsViewModel;
+
+        public frmAccounts(frmAccountsViewModel frmAccountsViewModel)
         {
+            _frmAccountsViewModel = frmAccountsViewModel;
             InitializeComponent();
         }
 
@@ -23,6 +26,12 @@ namespace BankSystem
             {
                 newForm.ShowDialog();
             }
+        }
+
+        private void frmAccounts_Load(object sender, EventArgs e)
+        {
+            dGVAccounts.DataSource = _frmAccountsViewModel.GetAccounts();
+            
         }
     }
 }
