@@ -16,5 +16,12 @@ namespace Data.Models
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string Contact { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} {Surname}";
+        }
     }
+
+    
 }

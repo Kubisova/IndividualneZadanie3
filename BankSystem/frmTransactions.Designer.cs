@@ -28,36 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.dgvTransactions = new System.Windows.Forms.DataGridView();
+            this.lblTransactions = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // dgvTransactions
             // 
-            this.label1.BackColor = System.Drawing.Color.Coral;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(560, 343);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Tu bude v gride prehľad transakcií.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dgvTransactions.AllowUserToAddRows = false;
+            this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTransactions.Location = new System.Drawing.Point(12, 25);
+            this.dgvTransactions.Name = "dgvTransactions";
+            this.dgvTransactions.ReadOnly = true;
+            this.dgvTransactions.RowHeadersVisible = false;
+            this.dgvTransactions.Size = new System.Drawing.Size(850, 381);
+            this.dgvTransactions.TabIndex = 0;
+            this.dgvTransactions.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTransactions_ColumnHeaderMouseClick);
+            // 
+            // lblTransactions
+            // 
+            this.lblTransactions.AutoSize = true;
+            this.lblTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactions.Location = new System.Drawing.Point(13, 9);
+            this.lblTransactions.Name = "lblTransactions";
+            this.lblTransactions.Size = new System.Drawing.Size(135, 13);
+            this.lblTransactions.TabIndex = 1;
+            this.lblTransactions.Text = "Transactions overview";
             // 
             // frmTransactions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(876, 427);
+            this.Controls.Add(this.lblTransactions);
+            this.Controls.Add(this.dgvTransactions);
             this.Name = "frmTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTransactions";
+            this.Text = "Transactions";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvTransactions;
+        private System.Windows.Forms.Label lblTransactions;
     }
 }

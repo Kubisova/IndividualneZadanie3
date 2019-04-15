@@ -12,26 +12,38 @@ namespace BankSystem
 {
     public partial class frmAccounts : Form
     {
-        private frmAccountsViewModel _frmAccountsViewModel;
+        private FrmAccountsViewModel _frmAccountsViewModel;
 
-        public frmAccounts(frmAccountsViewModel frmAccountsViewModel)
+        public frmAccounts(FrmAccountsViewModel frmAccountsViewModel)
         {
             _frmAccountsViewModel = frmAccountsViewModel;
             InitializeComponent();
+            
         }
 
         private void cmdManageAccount_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement())
+            if(dGVAccounts.CurrentRow!= null)
             {
-                newForm.ShowDialog();
+                int index = dGVAccounts.CurrentRow.Index;
+                int accountId = _frmAccountsViewModel.GetAccountId(index);
+                using (frmClientManagement newForm = new frmClientManagement(new FrmClientManagementViewModel(), accountId))
+                {
+                    newForm.ShowDialog();
+                }
             }
         }
 
         private void frmAccounts_Load(object sender, EventArgs e)
         {
             dGVAccounts.DataSource = _frmAccountsViewModel.GetAccounts();
-            
+            dGVAccounts.Columns[0].Visible = false;
+
+        }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            dGVAccounts.DataSource = _frmAccountsViewModel.GetFilteredAccounts(txtFilter.Text);
         }
     }
 }

@@ -12,9 +12,83 @@ namespace BankSystem
 {
     public partial class frmTransaction : Form
     {
-        public frmTransaction()
+        private FrmTransactionViewModel _frmTransactionViewModel;
+        private int _accountId;
+
+        public frmTransaction(FrmTransactionViewModel frmTransactionViewModel, int accountId)
         {
+            _accountId = accountId;
+            _frmTransactionViewModel = frmTransactionViewModel;
             InitializeComponent();
+        }
+
+        public frmTransaction(FrmTransactionViewModel frmTransactionViewModel, string transactionType, int accountId)
+        {
+            _accountId = accountId;
+            _frmTransactionViewModel = frmTransactionViewModel;
+
+            if (transactionType == "deposit")
+            {
+                _frmTransactionViewModel.IsDeposit = true;
+            }
+            else
+            {
+                _frmTransactionViewModel.IsWithdrawal = true;
+            }
+                        
+            InitializeComponent();
+            InitForDepositAndWithdrawal();
+        }
+
+        private void InitForDepositAndWithdrawal()
+        {
+            if (_frmTransactionViewModel.IsDeposit)
+            {
+                Text = "Deposit";
+            }
+            else
+            {
+                Text = "Withdrawal";
+            }
+            lblAccountOfRecipient.Visible = false;
+            txtRecipientAccount.Visible = false;
+            lblSender.Visible = false;
+            txtSenderAccout.Visible = false;
+            lblSS.Visible = false;
+            txtSS.Visible = false;
+            lblKS.Visible = false;
+            numtxtKS.Visible = false;
+            lblVS.Visible = false;
+            numtxtVS.Visible = false;
+            lblMessageForRecipient.Visible = false;
+            txtMessageForRecipient.Visible = false;
+            Height = 161;
+            Width = 376;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (_frmTransactionViewModel.IsDeposit ||_frmTransactionViewModel.IsWithdrawal)
+            {
+                _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
+            }
+            else
+            {
+                _frmTransactionViewModel.AccountOfRecipient = txtRecipientAccount.Text;
+                _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
+                _frmTransactionViewModel.Vs = int.Parse(numtxtVS.Text);
+                _frmTransactionViewModel.Ss = txtSS.Text;
+                _frmTransactionViewModel.Ks = int.Parse(numtxtKS.Text);
+                _frmTransactionViewModel.MessageForRecipient = txtMessageForRecipient.Text;
+            }
+
+            _frmTransactionViewModel.AddTransaction(_accountId);
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

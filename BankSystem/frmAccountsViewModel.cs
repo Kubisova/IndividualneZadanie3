@@ -9,19 +9,32 @@ using Data.Repositories;
 
 namespace BankSystem
 {
-    public class frmAccountsViewModel
+    public class FrmAccountsViewModel
     {
         private AccountRepository _accountRepository;
+        private List<AccountView> _loadedAccounts;
 
-        public frmAccountsViewModel()
+        public FrmAccountsViewModel()
         {
             AccountRepository accountRepository = new AccountRepository();
             _accountRepository = accountRepository;
         }
 
-        public List<Account> GetAccounts()
+        public List<AccountView> GetAccounts()
         {
-            return _accountRepository.GetAccounts();
+            _loadedAccounts = _accountRepository.GetAccountsForView();
+            return _loadedAccounts;
+        }
+
+        public List<AccountView> GetFilteredAccounts(string filter)
+        {
+            _loadedAccounts = _accountRepository.GetFilteredAccountsForView(filter);
+            return _loadedAccounts;
+        }
+
+        public int GetAccountId(int index)
+        {
+            return _loadedAccounts[index].AccountId;
         }
     }
 }

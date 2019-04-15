@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblAccountInfo = new System.Windows.Forms.Label();
             this.cmdUpdate = new System.Windows.Forms.Button();
             this.cmdNewTransaction = new System.Windows.Forms.Button();
             this.cmdCloseAccount = new System.Windows.Forms.Button();
@@ -36,45 +36,46 @@
             this.cmdWithdrawal = new System.Windows.Forms.Button();
             this.cmdDeposit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.btnAddNewCard = new System.Windows.Forms.Button();
+            this.btnUnblockBlockedCard = new System.Windows.Forms.Button();
+            this.dGVShortAccountInfo = new System.Windows.Forms.DataGridView();
+            this.dGVCards = new System.Windows.Forms.DataGridView();
+            this.lblAccountInfotext = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblCardsInfo = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVShortAccountInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVCards)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblAccountInfo
             // 
-            this.label1.BackColor = System.Drawing.Color.Cyan;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(16, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(975, 175);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Niekde v tomto okne budú stručné NEEDITOVATEĽNÉ informácie o účte, klientovi, akt" +
-    "uálnom zostatku na účte a povolenom prečerpaní.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAccountInfo.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblAccountInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblAccountInfo.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblAccountInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblAccountInfo.Location = new System.Drawing.Point(12, 9);
+            this.lblAccountInfo.Name = "lblAccountInfo";
+            this.lblAccountInfo.Size = new System.Drawing.Size(732, 185);
+            this.lblAccountInfo.TabIndex = 2;
             // 
             // cmdUpdate
             // 
-            this.cmdUpdate.Location = new System.Drawing.Point(16, 211);
-            this.cmdUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdUpdate.Location = new System.Drawing.Point(23, 227);
             this.cmdUpdate.Name = "cmdUpdate";
-            this.cmdUpdate.Size = new System.Drawing.Size(149, 28);
+            this.cmdUpdate.Size = new System.Drawing.Size(165, 36);
             this.cmdUpdate.TabIndex = 4;
-            this.cmdUpdate.Text = "Update info";
+            this.cmdUpdate.Text = "Update account or client";
             this.cmdUpdate.UseVisualStyleBackColor = true;
             this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
             // 
             // cmdNewTransaction
             // 
-            this.cmdNewTransaction.Location = new System.Drawing.Point(523, 315);
-            this.cmdNewTransaction.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdNewTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdNewTransaction.Location = new System.Drawing.Point(23, 281);
             this.cmdNewTransaction.Name = "cmdNewTransaction";
-            this.cmdNewTransaction.Size = new System.Drawing.Size(149, 28);
+            this.cmdNewTransaction.Size = new System.Drawing.Size(165, 36);
             this.cmdNewTransaction.TabIndex = 5;
             this.cmdNewTransaction.Text = "New transaction";
             this.cmdNewTransaction.UseVisualStyleBackColor = true;
@@ -82,10 +83,10 @@
             // 
             // cmdCloseAccount
             // 
-            this.cmdCloseAccount.Location = new System.Drawing.Point(523, 423);
-            this.cmdCloseAccount.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdCloseAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdCloseAccount.Location = new System.Drawing.Point(578, 227);
             this.cmdCloseAccount.Name = "cmdCloseAccount";
-            this.cmdCloseAccount.Size = new System.Drawing.Size(149, 28);
+            this.cmdCloseAccount.Size = new System.Drawing.Size(148, 36);
             this.cmdCloseAccount.TabIndex = 6;
             this.cmdCloseAccount.Text = "Close account";
             this.cmdCloseAccount.UseVisualStyleBackColor = true;
@@ -93,10 +94,10 @@
             // 
             // cmdAllTransactions
             // 
-            this.cmdAllTransactions.Location = new System.Drawing.Point(523, 211);
-            this.cmdAllTransactions.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdAllTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdAllTransactions.Location = new System.Drawing.Point(212, 281);
             this.cmdAllTransactions.Name = "cmdAllTransactions";
-            this.cmdAllTransactions.Size = new System.Drawing.Size(149, 28);
+            this.cmdAllTransactions.Size = new System.Drawing.Size(146, 36);
             this.cmdAllTransactions.TabIndex = 8;
             this.cmdAllTransactions.Text = "All transactions";
             this.cmdAllTransactions.UseVisualStyleBackColor = true;
@@ -104,10 +105,10 @@
             // 
             // cmdWithdrawal
             // 
-            this.cmdWithdrawal.Location = new System.Drawing.Point(16, 423);
-            this.cmdWithdrawal.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdWithdrawal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdWithdrawal.Location = new System.Drawing.Point(578, 281);
             this.cmdWithdrawal.Name = "cmdWithdrawal";
-            this.cmdWithdrawal.Size = new System.Drawing.Size(149, 28);
+            this.cmdWithdrawal.Size = new System.Drawing.Size(148, 36);
             this.cmdWithdrawal.TabIndex = 9;
             this.cmdWithdrawal.Text = "Withdrawal";
             this.cmdWithdrawal.UseVisualStyleBackColor = true;
@@ -115,10 +116,10 @@
             // 
             // cmdDeposit
             // 
-            this.cmdDeposit.Location = new System.Drawing.Point(16, 315);
-            this.cmdDeposit.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdDeposit.Location = new System.Drawing.Point(387, 281);
             this.cmdDeposit.Name = "cmdDeposit";
-            this.cmdDeposit.Size = new System.Drawing.Size(149, 28);
+            this.cmdDeposit.Size = new System.Drawing.Size(163, 36);
             this.cmdDeposit.TabIndex = 10;
             this.cmdDeposit.Text = "Deposit";
             this.cmdDeposit.UseVisualStyleBackColor = true;
@@ -126,100 +127,113 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.DarkMagenta;
+            this.label2.BackColor = System.Drawing.Color.Lavender;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(999, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(749, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(253, 478);
+            this.label2.Size = new System.Drawing.Size(337, 281);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Niekde v tomto okne bude grid s platobnými kartami priradenými k účtu.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
-            // label3
+            // btnAddNewCard
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.ForeColor = System.Drawing.Color.MediumPurple;
-            this.label3.Location = new System.Drawing.Point(170, 201);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(311, 74);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "< Odklik na úpravu údajov o účte/klientovi";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAddNewCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNewCard.Location = new System.Drawing.Point(212, 227);
+            this.btnAddNewCard.Name = "btnAddNewCard";
+            this.btnAddNewCard.Size = new System.Drawing.Size(146, 36);
+            this.btnAddNewCard.TabIndex = 18;
+            this.btnAddNewCard.Text = "Add new card";
+            this.btnAddNewCard.UseVisualStyleBackColor = true;
+            this.btnAddNewCard.Click += new System.EventHandler(this.btnAddNewCard_Click);
             // 
-            // label4
+            // btnUnblockBlockedCard
             // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.label4.Location = new System.Drawing.Point(680, 415);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(311, 74);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "< Odklik na zatvorenie účtu";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnUnblockBlockedCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnblockBlockedCard.Location = new System.Drawing.Point(387, 227);
+            this.btnUnblockBlockedCard.Name = "btnUnblockBlockedCard";
+            this.btnUnblockBlockedCard.Size = new System.Drawing.Size(163, 36);
+            this.btnUnblockBlockedCard.TabIndex = 19;
+            this.btnUnblockBlockedCard.Text = "Unblock blocked card";
+            this.btnUnblockBlockedCard.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // dGVShortAccountInfo
             // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.ForeColor = System.Drawing.Color.Olive;
-            this.label5.Location = new System.Drawing.Point(170, 306);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(311, 74);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "< Odklik na vloženie peňazí na účet";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dGVShortAccountInfo.AllowUserToAddRows = false;
+            this.dGVShortAccountInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVShortAccountInfo.Location = new System.Drawing.Point(23, 53);
+            this.dGVShortAccountInfo.Name = "dGVShortAccountInfo";
+            this.dGVShortAccountInfo.ReadOnly = true;
+            this.dGVShortAccountInfo.RowHeadersVisible = false;
+            this.dGVShortAccountInfo.Size = new System.Drawing.Size(703, 90);
+            this.dGVShortAccountInfo.TabIndex = 20;
             // 
-            // label6
+            // dGVCards
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label6.Location = new System.Drawing.Point(173, 415);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(311, 74);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "< Odklik na výber peňazí z účtu";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dGVCards.AllowUserToAddRows = false;
+            this.dGVCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVCards.Location = new System.Drawing.Point(764, 53);
+            this.dGVCards.Name = "dGVCards";
+            this.dGVCards.ReadOnly = true;
+            this.dGVCards.RowHeadersVisible = false;
+            this.dGVCards.Size = new System.Drawing.Size(306, 189);
+            this.dGVCards.TabIndex = 21;
             // 
-            // label7
+            // lblAccountInfotext
             // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.label7.Location = new System.Drawing.Point(680, 201);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(311, 74);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "< Odklik na zobrazenie transakcií na účte";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAccountInfotext.AutoSize = true;
+            this.lblAccountInfotext.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblAccountInfotext.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccountInfotext.Location = new System.Drawing.Point(23, 34);
+            this.lblAccountInfotext.Name = "lblAccountInfotext";
+            this.lblAccountInfotext.Size = new System.Drawing.Size(79, 13);
+            this.lblAccountInfotext.TabIndex = 22;
+            this.lblAccountInfotext.Text = "Account info";
             // 
-            // label8
+            // btnClose
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label8.Location = new System.Drawing.Point(680, 306);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(311, 74);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "< Odklik na zadanie novej transakcie";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnClose.Location = new System.Drawing.Point(991, 336);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(94, 27);
+            this.btnClose.TabIndex = 23;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // lblCardsInfo
+            // 
+            this.lblCardsInfo.AutoSize = true;
+            this.lblCardsInfo.BackColor = System.Drawing.Color.Lavender;
+            this.lblCardsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCardsInfo.Location = new System.Drawing.Point(764, 34);
+            this.lblCardsInfo.Name = "lblCardsInfo";
+            this.lblCardsInfo.Size = new System.Drawing.Size(64, 13);
+            this.lblCardsInfo.TabIndex = 24;
+            this.lblCardsInfo.Text = "Cards info";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(633, 336);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(93, 27);
+            this.btnRefresh.TabIndex = 25;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmClientManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 505);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(1097, 375);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.lblCardsInfo);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.lblAccountInfotext);
+            this.Controls.Add(this.dGVCards);
+            this.Controls.Add(this.dGVShortAccountInfo);
+            this.Controls.Add(this.btnUnblockBlockedCard);
+            this.Controls.Add(this.btnAddNewCard);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdDeposit);
             this.Controls.Add(this.cmdWithdrawal);
@@ -227,18 +241,20 @@
             this.Controls.Add(this.cmdCloseAccount);
             this.Controls.Add(this.cmdNewTransaction);
             this.Controls.Add(this.cmdUpdate);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Controls.Add(this.lblAccountInfo);
             this.Name = "frmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmClientManagement";
+            this.Text = "Account management";
+            ((System.ComponentModel.ISupportInitialize)(this.dGVShortAccountInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVCards)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAccountInfo;
         private System.Windows.Forms.Button cmdUpdate;
         private System.Windows.Forms.Button cmdNewTransaction;
         private System.Windows.Forms.Button cmdCloseAccount;
@@ -246,11 +262,13 @@
         private System.Windows.Forms.Button cmdWithdrawal;
         private System.Windows.Forms.Button cmdDeposit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnAddNewCard;
+        private System.Windows.Forms.Button btnUnblockBlockedCard;
+        private System.Windows.Forms.DataGridView dGVShortAccountInfo;
+        private System.Windows.Forms.DataGridView dGVCards;
+        private System.Windows.Forms.Label lblAccountInfotext;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label lblCardsInfo;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

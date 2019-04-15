@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmAccountsViewModel.cs" />
+    <Compile Include="AccountFactory.cs" />
+    <Compile Include="FrmAccountsViewModel.cs" />
+    <Compile Include="FrmAccountViewModel.cs" />
     <Compile Include="frmClientManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +61,7 @@
     <Compile Include="frmAccounts.Designer.cs">
       <DependentUpon>frmAccounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmClientManagementViewModel.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,7 +74,7 @@
     <Compile Include="frmAccount.Designer.cs">
       <DependentUpon>frmAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainViewModel.cs" />
+    <Compile Include="FrmMainViewModel.cs" />
     <Compile Include="frmTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,8 +87,11 @@
     <Compile Include="frmTransactions.Designer.cs">
       <DependentUpon>frmTransactions.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmTransactionsViewModel.cs" />
+    <Compile Include="FrmTransactionViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionFactory.cs" />
     <EmbeddedResource Include="frmAccount.resx">
       <DependentUpon>frmAccount.cs</DependentUpon>
     </EmbeddedResource>

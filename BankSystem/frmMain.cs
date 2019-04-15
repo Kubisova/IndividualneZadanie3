@@ -12,31 +12,46 @@ namespace BankSystem
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        private FrmMainViewModel _frmMainViewModel;
+
+        public frmMain(FrmMainViewModel frmMainViewModel)
         {
+            _frmMainViewModel = frmMainViewModel;
             InitializeComponent();
         }
 
         private void cmdFindClient_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement())
+            var findedAccounts = _frmMainViewModel.FindClients(txtFilter.Text);
+
+            if (findedAccounts.Count == 1)
             {
-                newForm.ShowDialog();
+                using (frmClientManagement newForm = new frmClientManagement(new FrmClientManagementViewModel(), findedAccounts[0].Id))
+                {
+                    newForm.ShowDialog();
+                }
             }
+            else
+            {
+                MessageBox.Show("There is no such client/account, or there was found more than one account");
+            }
+
+
+            
         }
 
         private void cmdNewAccount_Click(object sender, EventArgs e)
         {
-            using (frmAccount newForm = new frmAccount())
+            using (frmAccount newForm = new frmAccount(new FrmAccountViewModel()))
             {
-                newForm.Text = "Pridaj účet";
+                newForm.Text = "Add account";
                 newForm.ShowDialog();
             }
         }
 
         private void cmdAllAccounts_Click(object sender, EventArgs e)
         {
-            using (frmAccounts newForm = new frmAccounts(new frmAccountsViewModel()))
+            using (frmAccounts newForm = new frmAccounts(new FrmAccountsViewModel()))
             {
                 
                 newForm.ShowDialog();
@@ -45,7 +60,7 @@ namespace BankSystem
 
         private void cmdAllTransactions_Click(object sender, EventArgs e)
         {
-            using (frmTransactions newForm = new frmTransactions())
+            using (frmTransactions newForm = new frmTransactions(new FrmTransactionsViewModel()))
             {
                 newForm.ShowDialog();
             }

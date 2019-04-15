@@ -12,9 +12,9 @@ namespace Data.Repositories
     {
         string connectionString = @"Server = kubisova\sql2014; Database = TransformerbankDb;Trusted_Connection = true";
 
-        public List<Account> GetClients()
+        public List<Client> GetClients()
         {
-            List<Account> clients = new List<Account>();
+            List<Client> clients = new List<Client>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -35,7 +35,9 @@ namespace Data.Repositories
                             client.Street = reader.GetString(4);
                             client.StreetNumber = reader.GetString(5); 
                             client.City = reader.GetString(6); 
-                            client.Contact = reader.GetString(7); 
+                            client.Contact = reader.GetString(7);
+
+                            clients.Add(client);
                         }
                     }
                 }

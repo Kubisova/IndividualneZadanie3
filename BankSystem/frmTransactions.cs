@@ -12,22 +12,41 @@ namespace BankSystem
 {
     public partial class frmTransactions : Form
     {
+        private FrmTransactionsViewModel _frmTransactionsViewModel;
+        private int _accountId;
 
         /// <summary>
         /// Used when viewing all transactions.
         /// </summary>
-        public frmTransactions()
+        public frmTransactions(FrmTransactionsViewModel frmTransactionsViewModel)
         {
+            _frmTransactionsViewModel = frmTransactionsViewModel;
             InitializeComponent();
+            dgvTransactions.DataSource = _frmTransactionsViewModel.GetTransactions();
+            dgvTransactions.Columns[0].Visible = false;
         }
 
         /// <summary>
         /// Used when viewing selected client's transactions.
         /// </summary>
         /// <param name="clientId"></param>
-        public frmTransactions(int clientId)
+        public frmTransactions(FrmTransactionsViewModel frmTransactionsViewModel, int accountId)
         {
+            _frmTransactionsViewModel = frmTransactionsViewModel;
+            _accountId = accountId;
             InitializeComponent();
+            dgvTransactions.DataSource = _frmTransactionsViewModel.GetTransactionsByAccountId(accountId);
+            dgvTransactions.Columns[0].Visible = false;
+
+        }
+
+        private void dgvTransactions_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string orderBy = dgvTransactions.Columns[e.ColumnIndex].Name;
+            dgvTransactions.DataSource = _frmTransactionsViewModel.GetTransactionsByAccountId(_accountId, orderBy);
+            dgvTransactions.Columns[0].Visible = false;
+
+            
         }
     }
 }
