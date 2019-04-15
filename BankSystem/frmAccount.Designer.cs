@@ -276,6 +276,7 @@
             this.numtxtOverdraftLimit.Name = "numtxtOverdraftLimit";
             this.numtxtOverdraftLimit.Size = new System.Drawing.Size(100, 20);
             this.numtxtOverdraftLimit.TabIndex = 28;
+            this.numtxtOverdraftLimit.Text = "0";
             // 
             // lblAccountName
             // 

@@ -11,7 +11,7 @@ namespace Data.Repositories
 {
     public class TransactionRepository
     {
-        public string connectionString = @"Server = DESKTOP-GKFDQEI\SQLEXPRESS; Database = TransformerbankDb;Trusted_Connection = true";
+        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
 
         public void AddTransaction(Transaction transaction, int accountId)
         {
@@ -181,42 +181,43 @@ namespace Data.Repositories
             return transactions;
         }
 
-        public List<Transaction> GetTransactionsByAccountId(int accountId, string orderBy)
-        {
-            List<Transaction> transactions = new List<Transaction>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand())
-                {
-                    command.CommandText = "Select * from [Transaction] where AccountId = @accountId order by @orderBy";
-                    command.Parameters.Add("@accountId", SqlDbType.Int).Value = accountId;
-                    //command.Parameters.Add("@orderBy", ).Value = orderBy;
-                    command.Connection = connection;
+        //triedenie 
+        //public List<Transaction> GetTransactionsByAccountId(int accountId, string orderBy)
+        //{
+        //    List<Transaction> transactions = new List<Transaction>();
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        using (SqlCommand command = new SqlCommand())
+        //        {
+        //            command.CommandText = "Select * from [Transaction] where AccountId = @accountId order by @orderBy";
+        //            command.Parameters.Add("@accountId", SqlDbType.Int).Value = accountId;
+        //            command.Parameters.Add("@orderBy", ).Value = orderBy;
+        //            command.Connection = connection;
+        //
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    Transaction transaction = new Transaction();
+        //                    transaction.Id = reader.GetInt32(0);
+        //                    transaction.TransactionType = (TransactionType)reader.GetInt32(1);
+        //                    transaction.Ammount = reader.GetDecimal(3);
+        //                    transaction.TransactionDate = reader.GetDateTime(4);
+        //                    transaction.AccountOfRecipient = reader.IsDBNull(5) ? "" : reader.GetString(5);
+        //                    transaction.Vs = reader.IsDBNull(6) ? 0 : reader.GetInt32(6);
+        //                    transaction.Ss = reader.IsDBNull(7) ? "" : reader.GetString(7);
+        //                    transaction.Ks = reader.IsDBNull(8) ? 0 : reader.GetInt32(8);
+        //                    transaction.MessageForRecipient = reader.IsDBNull(9) ? "" : reader.GetString(9);
 
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Transaction transaction = new Transaction();
-                            transaction.Id = reader.GetInt32(0);
-                            transaction.TransactionType = (TransactionType)reader.GetInt32(1);
-                            transaction.Ammount = reader.GetDecimal(3);
-                            transaction.TransactionDate = reader.GetDateTime(4);
-                            transaction.AccountOfRecipient = reader.IsDBNull(5) ? "" : reader.GetString(5);
-                            transaction.Vs = reader.IsDBNull(6) ? 0 : reader.GetInt32(6);
-                            transaction.Ss = reader.IsDBNull(7) ? "" : reader.GetString(7);
-                            transaction.Ks = reader.IsDBNull(8) ? 0 : reader.GetInt32(8);
-                            transaction.MessageForRecipient = reader.IsDBNull(9) ? "" : reader.GetString(9);
 
-
-                            transactions.Add(transaction);
-                        }
-                    }
-                }
-            }
-
-            return transactions;
-        }
+        //                    transactions.Add(transaction);
+        //                }
+        //            }
+        //        }
+        //    }
+        //
+            //return transactions;
+        //}
     }
 }

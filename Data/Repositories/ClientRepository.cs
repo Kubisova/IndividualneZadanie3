@@ -10,7 +10,7 @@ namespace Data.Repositories
 {
     public class ClientRepository
     {
-        string connectionString = @"Server = kubisova\sql2014; Database = TransformerbankDb;Trusted_Connection = true";
+        string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
 
         public List<Client> GetClients()
         {

@@ -13,7 +13,6 @@ namespace BankSystem
     public partial class frmTransactions : Form
     {
         private FrmTransactionsViewModel _frmTransactionsViewModel;
-        private int _accountId;
 
         /// <summary>
         /// Used when viewing all transactions.
@@ -33,20 +32,10 @@ namespace BankSystem
         public frmTransactions(FrmTransactionsViewModel frmTransactionsViewModel, int accountId)
         {
             _frmTransactionsViewModel = frmTransactionsViewModel;
-            _accountId = accountId;
             InitializeComponent();
             dgvTransactions.DataSource = _frmTransactionsViewModel.GetTransactionsByAccountId(accountId);
             dgvTransactions.Columns[0].Visible = false;
 
-        }
-
-        private void dgvTransactions_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            string orderBy = dgvTransactions.Columns[e.ColumnIndex].Name;
-            dgvTransactions.DataSource = _frmTransactionsViewModel.GetTransactionsByAccountId(_accountId, orderBy);
-            dgvTransactions.Columns[0].Visible = false;
-
-            
         }
     }
 }

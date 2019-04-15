@@ -56,7 +56,7 @@
             this.lblAccountInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblAccountInfo.Location = new System.Drawing.Point(12, 9);
             this.lblAccountInfo.Name = "lblAccountInfo";
-            this.lblAccountInfo.Size = new System.Drawing.Size(732, 185);
+            this.lblAccountInfo.Size = new System.Drawing.Size(731, 185);
             this.lblAccountInfo.TabIndex = 2;
             // 
             // cmdUpdate
@@ -132,7 +132,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.Location = new System.Drawing.Point(749, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(337, 281);
+            this.label2.Size = new System.Drawing.Size(401, 308);
             this.label2.TabIndex = 11;
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
@@ -172,11 +172,11 @@
             // 
             this.dGVCards.AllowUserToAddRows = false;
             this.dGVCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVCards.Location = new System.Drawing.Point(764, 53);
+            this.dGVCards.Location = new System.Drawing.Point(767, 50);
             this.dGVCards.Name = "dGVCards";
             this.dGVCards.ReadOnly = true;
             this.dGVCards.RowHeadersVisible = false;
-            this.dGVCards.Size = new System.Drawing.Size(306, 189);
+            this.dGVCards.Size = new System.Drawing.Size(368, 189);
             this.dGVCards.TabIndex = 21;
             // 
             // lblAccountInfotext
@@ -192,7 +192,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(991, 336);
+            this.btnClose.Location = new System.Drawing.Point(1056, 336);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(94, 27);
             this.btnClose.TabIndex = 23;
@@ -225,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 375);
+            this.ClientSize = new System.Drawing.Size(1162, 382);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblCardsInfo);
             this.Controls.Add(this.btnClose);

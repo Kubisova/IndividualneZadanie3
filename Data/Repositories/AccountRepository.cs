@@ -11,7 +11,7 @@ namespace Data.Repositories
 {
     public class AccountRepository
     {
-        public string connectionString = @"Server = DESKTOP-GKFDQEI\SQLEXPRESS; Database = TransformerbankDb;Trusted_Connection = true";
+        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
 
         public List<Account> GetAccounts()
         {
@@ -32,7 +32,6 @@ namespace Data.Repositories
                             Client client = new Client();
                             account.Client = client;
                             account.Id = reader.GetInt32(0);
-                            //account.ClientId = reader.GetInt32(1);
                             account.Iban = reader.GetString(2);
                             account.EstablishDate = reader.GetDateTime(3);
                             account.CancelDate = reader.IsDBNull(4)? DateTime.MinValue: reader.GetDateTime(4);
@@ -101,11 +100,12 @@ namespace Data.Repositories
                     using (SqlCommand command = connection.CreateCommand())
                     {
                         command.CommandText = @"insert into Card output inserted.CardId 
-                                                values(@cardNumber, @pin, @cardValidity)";
+                                                values(@cardNumber, @pin, @cardValidity,@isBlocked)";
 
                         command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = account.Cards[i].CardNumber;
                         command.Parameters.Add("@pin", SqlDbType.Int).Value = account.Cards[i].Pin;
                         command.Parameters.Add("@cardValidity", SqlDbType.Date).Value = account.Cards[i].CardValidity;
+                        command.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = account.Cards[i].IsBlocked;
 
                         cardId = Convert.ToInt32(command.ExecuteScalar());
                     }
@@ -395,6 +395,50 @@ namespace Data.Repositories
             }
 
             return accounts;
+        }
+
+        public int GetAccountIdByCardNumber(int cardNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"Select a.AccountId
+                                            from Account as a
+                                            inner join AccountCard as ac
+                                            on a.AccountId = ac.AccountId
+                                            inner join Card as c
+                                            on c.CardId  = ac.CardId
+                                            where CardNumber = @cardNumber";
+
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
+
+        public decimal GetAccounBalanceByCardNumber(int cardNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"Select a.AccountBalance
+                                            from Account as a
+                                            inner join AccountCard as ac
+                                            on a.AccountId = ac.AccountId
+                                            inner join Card as c
+                                            on c.CardId  = ac.CardId
+                                            where CardNumber = @cardNumber";
+
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    return (decimal)command.ExecuteScalar();
+                }
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using Data.Models;
 
 namespace BankSystem
 {
-    static class TransactionFactory
+    public static class TransactionFactory
     {
         public static Transaction CreateTransaction(decimal ammount, string accountOfRecipient, int vs, int ks, string ss, string messageForRecipient)
         {

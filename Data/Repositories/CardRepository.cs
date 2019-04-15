@@ -11,7 +11,7 @@ namespace Data.Repositories
 {
     public class CardRepository
     {
-        public string connectionString = @"Server = DESKTOP-GKFDQEI\SQLEXPRESS; Database = TransformerbankDb;Trusted_Connection = true";
+        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
 
         public int GetLastIssuedCardNumber()
         {
@@ -79,11 +79,12 @@ namespace Data.Repositories
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = @"insert into Card output inserted.CardId 
-                                                values(@cardNumber, @pin, @cardValidity)";
+                                                values(@cardNumber, @pin, @cardValidity, @isBlocked)";
 
                     command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = card.CardNumber;
                     command.Parameters.Add("@pin", SqlDbType.Int).Value = card.Pin;
                     command.Parameters.Add("@cardValidity", SqlDbType.Date).Value = card.CardValidity;
+                    command.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = card.IsBlocked;
 
                     cardId = Convert.ToInt32(command.ExecuteScalar());
                 }
@@ -118,7 +119,7 @@ namespace Data.Repositories
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
                 {
-                    command.CommandText = @"Select CardNumber, Pin, CardValidity 
+                    command.CommandText = @"Select CardNumber, Pin, CardValidity, IsBlocked 
                                             from Card as c
                                             inner join AccountCard as ac
                                             on c.CardId = ac.CardId
@@ -134,6 +135,7 @@ namespace Data.Repositories
                             card.CardNumber = reader.GetInt32(0);
                             card.Pin = reader.GetInt32(1);
                             card.CardValidity = reader.GetDateTime(2);
+                            card.IsBlocked = reader.GetBoolean(3);
 
                             cards.Add(card);
                         }
@@ -142,6 +144,149 @@ namespace Data.Repositories
             }
 
             return cards;
+        }
+
+        public int GetPinByCardNumber(int cardNumber)
+        {
+            int pin;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "Select * from Card where CardNumber = @cardNumber";
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            pin = reader.GetInt32(2);
+                        }
+                        else
+                        {
+                            pin = 0;
+                        }
+                    }
+
+                    return pin;
+                }
+            }
+        }
+
+        public DateTime GetAccountCancelDate(int cardNumber)
+        {
+            DateTime cancelDate;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"Select *
+                                            from Account as a
+                                            inner join AccountCard as ac
+                                            on a.AccountId = ac.AccountId
+                                            inner join Card as c
+                                            on c.CardId  = ac.CardId
+                                            where CardNumber = @cardNumber";
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cancelDate = reader.IsDBNull(5)? DateTime.MinValue : reader.GetDateTime(5);
+                        }
+                        else
+                        {
+                            cancelDate = DateTime.MinValue;
+                        }
+                    }
+
+                    return cancelDate;
+                }
+            }
+        }
+
+        public DateTime GetCardValidityDate(int cardNumber)
+        {
+            DateTime validityDate;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "Select CardValidity from Card where CardNumber = @cardNumber";
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    validityDate = (DateTime)command.ExecuteScalar();
+
+                    //using (SqlDataReader reader = command.ExecuteReader())
+                    //{
+                    //    if (reader.Read())
+                    //    {
+                    //        validityDate = reader.GetDateTime(3);
+                    //    }
+                    //    else
+                    //    {
+                    //        validityDate = dat;
+                    //    }
+                    //}
+
+                    return validityDate;
+                }
+            }
+        }
+
+        public bool IsCardBlocked(int cardNumber)
+        {
+            bool isBlocked;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "Select IsBlocked from Card where CardNumber = @cardNumber";
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+
+                    isBlocked = (bool)command.ExecuteScalar();
+
+                    //using (SqlDataReader reader = command.ExecuteReader())
+                    //{
+                    //    if (reader.Read())
+                    //    {
+                    //        validityDate = reader.GetDateTime(3);
+                    //    }
+                    //    else
+                    //    {
+                    //        validityDate = dat;
+                    //    }
+                    //}
+
+                    return isBlocked;
+                }
+            }
+        }
+
+        public void SetCardAsBlocked(int cardNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"update Card set IsBlocked = @isBlocked where CardNumber = @cardNumber";
+
+                    command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
+                    command.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = 1;
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

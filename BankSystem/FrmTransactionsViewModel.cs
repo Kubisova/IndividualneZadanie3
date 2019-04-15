@@ -27,11 +27,5 @@ namespace BankSystem
         {
             return _transactionRepository.GetTransactionsByAccountId(accountId);
         }
-
-        public List<Transaction> GetTransactionsByAccountId(int accountId, string orderBy)
-        {
-            return _transactionRepository.GetTransactionsByAccountId(accountId, orderBy);
-        }
-
     }
 }

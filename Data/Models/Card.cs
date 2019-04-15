@@ -12,5 +12,6 @@ namespace Data.Models
         public int CardNumber { get; set; }
         public int Pin { get; set; }
         public DateTime CardValidity { get; set; }
+        public bool IsBlocked { get; set; }
     }
 }

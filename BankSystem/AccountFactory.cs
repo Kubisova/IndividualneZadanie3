@@ -57,6 +57,7 @@ namespace BankSystem
                 card.CardNumber = ++lastIssuedCardNumber;
                 card.Pin = ++lastCardPin;
                 card.CardValidity = DateTime.Now.Date.AddYears(2);
+                card.IsBlocked = false;
                 cards.Add(card);
             }
             return cards;
@@ -81,6 +82,7 @@ namespace BankSystem
                 card.CardNumber = ++lastIssuedCardNumber;
                 card.Pin = ++lastCardPin;
                 card.CardValidity = DateTime.Now.Date.AddYears(2);
+                card.IsBlocked = false;
             
             return card;
         }

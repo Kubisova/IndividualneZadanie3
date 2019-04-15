@@ -43,7 +43,6 @@
             this.dgvTransactions.RowHeadersVisible = false;
             this.dgvTransactions.Size = new System.Drawing.Size(850, 381);
             this.dgvTransactions.TabIndex = 0;
-            this.dgvTransactions.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTransactions_ColumnHeaderMouseClick);
             // 
             // lblTransactions
             // 
