@@ -11,12 +11,9 @@ namespace Data.Repositories
 {
     static class Constants
     {
-        public const string CONNECTION_STRING = @"Server = DESKTOP-GKFDQEI\SQLEXPRESS; Database = TransformerBankDb;Trusted_Connection = true";
+        public const string CONNECTION_STRING = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
 
-        //home
-        //public const string CONNECTION_STRING = @"Server = DESKTOP - GKFDQEI\SQLEXPRESS; Database = TransformerBankDb;Trusted_Connection = true";
-        //work
-        //public const string CONNECTION_STRING = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
+        
     }
     public class AccountRepository
     {
