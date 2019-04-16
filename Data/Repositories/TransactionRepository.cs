@@ -11,12 +11,15 @@ namespace Data.Repositories
 {
     public class TransactionRepository
     {
-        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
-
+        /// <summary>
+        /// Metoda, ktora prida do databazy transakciu prevod na iny ucet
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <param name="accountId"></param>
         public void AddTransaction(Transaction transaction, int accountId)
         {
             //bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -48,10 +51,15 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora prida do databazy transakciu depozit
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <param name="accountId"></param>
         public void AddDeposit(Transaction transaction, int accountId)
         {
             //bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -78,10 +86,15 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora prida do databazy transakciu vyber
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <param name="accountId"></param>
         public void AddWithdrawal(Transaction transaction, int accountId)
         {
             //bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -108,10 +121,14 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy vsetky transakcie
+        /// </summary>
+        /// <returns></returns>
         public List<Transaction> GetTransactions()
         {
             List<Transaction> transactions = new List<Transaction>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -144,10 +161,15 @@ namespace Data.Repositories
             return transactions;
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy transakcie podla id uctu
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public List<Transaction> GetTransactionsByAccountId(int accountId)
         {
             List<Transaction> transactions = new List<Transaction>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -181,7 +203,7 @@ namespace Data.Repositories
             return transactions;
         }
 
-        //triedenie 
+        //triedenie nefunkcne
         //public List<Transaction> GetTransactionsByAccountId(int accountId, string orderBy)
         //{
         //    List<Transaction> transactions = new List<Transaction>();

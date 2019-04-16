@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 304);
+            this.ClientSize = new System.Drawing.Size(361, 303);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtAccountBalance);
             this.Controls.Add(this.btnAccountBalance);
@@ -159,7 +159,7 @@
             this.MaximumSize = new System.Drawing.Size(377, 342);
             this.MinimumSize = new System.Drawing.Size(377, 342);
             this.Name = "frmMenu";
-            this.Text = "Menu";
+            this.Text = "ATM Menu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

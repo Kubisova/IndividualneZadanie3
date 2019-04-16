@@ -8,6 +8,9 @@ using Data.Repositories;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmClientManagementViewModel
     {
         private AccountRepository _accountRepository;
@@ -54,6 +57,11 @@ namespace BankSystem
             {
                 return false;
             }
+        }
+
+        public void UnblockBlockedCard(int accountId)
+        {
+            _cardRepository.SetCardAsNotBlocked(accountId);
         }
     }
 }

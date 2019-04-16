@@ -18,6 +18,19 @@ namespace BankSystem
         {
             _frmMainViewModel = frmMainViewModel;
             InitializeComponent();
+            if (_frmMainViewModel.GetActiveAccountsCount()>0)
+            {
+                dgvTopClients.DataSource = _frmMainViewModel.GetTopClients();
+                dgvTopClients.DataMember = "TopClients";
+                dgvDemography.DataSource = _frmMainViewModel.GetDemography();
+                dgvDemography.DataMember = "Demography";
+                dgvEstablishedAccounts.DataSource = _frmMainViewModel.GetEstablAccountsMonthly();
+                dgvEstablishedAccounts.DataMember = "EstablishedAccounts";
+                lblNumberActiveAccount.Text = _frmMainViewModel.GetActiveAccountsCount().ToString();
+                lblNumberFunds.Text = _frmMainViewModel.GetFunds().ToString();
+            }
+            
+            
         }
 
         private void cmdFindClient_Click(object sender, EventArgs e)
@@ -35,9 +48,6 @@ namespace BankSystem
             {
                 MessageBox.Show("There is no such client/account, or there was found more than one account");
             }
-
-
-            
         }
 
         private void cmdNewAccount_Click(object sender, EventArgs e)
@@ -63,6 +73,21 @@ namespace BankSystem
             using (frmTransactions newForm = new frmTransactions(new FrmTransactionsViewModel()))
             {
                 newForm.ShowDialog();
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (_frmMainViewModel.GetActiveAccountsCount() > 0)
+            {
+                dgvTopClients.DataSource = _frmMainViewModel.GetTopClients();
+                dgvTopClients.DataMember = "TopClients";
+                dgvDemography.DataSource = _frmMainViewModel.GetDemography();
+                dgvDemography.DataMember = "Demography";
+                dgvEstablishedAccounts.DataSource = _frmMainViewModel.GetEstablAccountsMonthly();
+                dgvEstablishedAccounts.DataMember = "EstablishedAccounts";
+                lblNumberActiveAccount.Text = _frmMainViewModel.GetActiveAccountsCount().ToString();
+                lblNumberFunds.Text = _frmMainViewModel.GetFunds().ToString();
             }
         }
     }

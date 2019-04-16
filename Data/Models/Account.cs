@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
+    /// <summary>
+    /// Trieda ktora reprezentuje ucet v banke, obsahuje v sebe objekty klienta a kariet
+    /// </summary>
     public class Account
     {
         public int Id { get; set; }

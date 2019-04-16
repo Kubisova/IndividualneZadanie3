@@ -32,6 +32,7 @@
             this.dGVAccounts = new System.Windows.Forms.DataGridView();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.lblFilter = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVAccounts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,15 +76,28 @@
             this.lblFilter.TabIndex = 14;
             this.lblFilter.Text = "Find client / account";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(883, 27);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 15;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 552);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.txtFilter);
             this.Controls.Add(this.dGVAccounts);
             this.Controls.Add(this.cmdManageAccount);
+            this.MaximumSize = new System.Drawing.Size(987, 591);
+            this.MinimumSize = new System.Drawing.Size(987, 591);
             this.Name = "frmAccounts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Accounts";
@@ -99,5 +113,6 @@
         private System.Windows.Forms.DataGridView dGVAccounts;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

@@ -55,15 +55,23 @@ namespace TransformerBank
         private void btnOkWithdrawal_Click(object sender, EventArgs e)
         {
             _frmMenuViewModel.Amount = decimal.Parse(numtxtAmount.Text);
-            _frmMenuViewModel.AddWithdrawal();
-            MessageBox.Show("Thank you for using our services, have a nice day");
+            if (_frmMenuViewModel.IsNotEnoughMoney())
+            {
+                MessageBox.Show("It's not possible to make withdrawal, there is not enough money on your account.");
+            }
+            else
+            {
+                _frmMenuViewModel.AddWithdrawal();
+                MessageBox.Show("Thank you for using our services, have a nice day.");
+            }
+            
             Close();
 
         }
 
         private void btnBalanceOK_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thank you for using our services, have a nice day");
+            MessageBox.Show("Thank you for using our services, have a nice day.");
             Close();
         }
 

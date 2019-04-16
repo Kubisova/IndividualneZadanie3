@@ -156,6 +156,7 @@
             this.btnUnblockBlockedCard.TabIndex = 19;
             this.btnUnblockBlockedCard.Text = "Unblock blocked card";
             this.btnUnblockBlockedCard.UseVisualStyleBackColor = true;
+            this.btnUnblockBlockedCard.Click += new System.EventHandler(this.btnUnblockBlockedCard_Click);
             // 
             // dGVShortAccountInfo
             // 
@@ -242,6 +243,8 @@
             this.Controls.Add(this.cmdNewTransaction);
             this.Controls.Add(this.cmdUpdate);
             this.Controls.Add(this.lblAccountInfo);
+            this.MaximumSize = new System.Drawing.Size(1178, 421);
+            this.MinimumSize = new System.Drawing.Size(1178, 421);
             this.Name = "frmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Account management";

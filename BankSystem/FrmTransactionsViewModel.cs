@@ -8,6 +8,9 @@ using Data.Repositories;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmTransactionsViewModel
     {
         private TransactionRepository _transactionRepository;

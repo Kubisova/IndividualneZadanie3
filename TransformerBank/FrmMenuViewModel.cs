@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Data.Models;
 using Data.Repositories;
 
-
-
 namespace TransformerBank
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmMenuViewModel
     {
         public decimal Amount { get; set; }
@@ -47,6 +48,20 @@ namespace TransformerBank
         public string GetAccounBalance()
         {
             return _accountRepository.GetAccounBalanceByCardNumber(_cardNumber).ToString();
+        }
+
+        public bool IsNotEnoughMoney()
+        {
+            decimal accountBalance = _accountRepository.GetAccounBalanceByCardNumber(_cardNumber);
+
+            if (accountBalance < Amount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

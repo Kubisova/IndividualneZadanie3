@@ -8,6 +8,9 @@ using Data.Repositories;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmTransactionViewModel
     {
         public decimal Ammount { get; set; }
@@ -21,11 +24,15 @@ namespace BankSystem
         public bool IsWithdrawal { get; set; }
 
         private TransactionRepository _transactionRepository;
+        private AccountRepository _accountRepository;
 
         public FrmTransactionViewModel()
         {
             TransactionRepository transactionRepository = new TransactionRepository();
             _transactionRepository = transactionRepository;
+
+            AccountRepository accountRepository = new AccountRepository();
+            _accountRepository = accountRepository;
         }
 
         public void AddTransaction(int accountId)
@@ -47,9 +54,34 @@ namespace BankSystem
                 transaction = TransactionFactory.CreateTransaction(Ammount, AccountOfRecipient, Vs, Ks, Ss, MessageForRecipient);
                 _transactionRepository.AddTransaction(transaction, accountId);
             }
-
-           
-
         }
+
+        public string GetSenderAccountByAccounId(int accountId)
+        {
+            var account = _accountRepository.GetAccountById(accountId);
+            return account.Iban;
+        }
+
+        public decimal GetAccountBalance(int accountId)
+        {
+            var account = _accountRepository.GetAccountById(accountId);
+            return account.AccountBalance;
+        }
+
+        public bool IsNotEnoughMoney(decimal amount, int accountId)
+        {
+            var account = _accountRepository.GetAccountById(accountId);
+
+            if (account.AccountBalance < amount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

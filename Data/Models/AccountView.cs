@@ -7,6 +7,9 @@ using System.ComponentModel;
 
 namespace Data.Models
 {
+    /// <summary>
+    /// Trieda, ktora sa pouziva ako podklad pre zobrazenie v gride
+    /// </summary>
     public class AccountView
     {
         public int AccountId { get; set; }

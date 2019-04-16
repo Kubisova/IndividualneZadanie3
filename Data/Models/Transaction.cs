@@ -12,6 +12,9 @@ namespace Data.Models
         Kredit = 1, Debet = 2
     }
 
+    /// <summary>
+    /// Trieda pre transakcie: prevody medzi uctami, vybery a vklady
+    /// </summary>
     public class Transaction
     {
         public int Id { get; set; }

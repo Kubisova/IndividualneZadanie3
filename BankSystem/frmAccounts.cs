@@ -45,5 +45,12 @@ namespace BankSystem
         {
             dGVAccounts.DataSource = _frmAccountsViewModel.GetFilteredAccounts(txtFilter.Text);
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtFilter.Text = "";
+            dGVAccounts.DataSource = _frmAccountsViewModel.GetAccounts();
+            dGVAccounts.Columns[0].Visible = false;
+        }
     }
 }

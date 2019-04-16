@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
+    /// <summary>
+    /// Trieda reprezentujuca klienta banky
+    /// </summary>
     public class Client
     {
         public int Id { get; set; }

@@ -61,6 +61,8 @@
             this.ClientSize = new System.Drawing.Size(876, 427);
             this.Controls.Add(this.lblTransactions);
             this.Controls.Add(this.dgvTransactions);
+            this.MaximumSize = new System.Drawing.Size(892, 466);
+            this.MinimumSize = new System.Drawing.Size(892, 466);
             this.Name = "frmTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions";

@@ -20,6 +20,7 @@ namespace BankSystem
             _accountId = accountId;
             _frmTransactionViewModel = frmTransactionViewModel;
             InitializeComponent();
+            Init();
         }
 
         public frmTransaction(FrmTransactionViewModel frmTransactionViewModel, string transactionType, int accountId)
@@ -38,6 +39,11 @@ namespace BankSystem
                         
             InitializeComponent();
             InitForDepositAndWithdrawal();
+        }
+
+        private void Init()
+        {
+            txtSenderAccout.Text = _frmTransactionViewModel.GetSenderAccountByAccounId(_accountId);
         }
 
         private void InitForDepositAndWithdrawal()
@@ -70,19 +76,34 @@ namespace BankSystem
         {
             if (_frmTransactionViewModel.IsDeposit ||_frmTransactionViewModel.IsWithdrawal)
             {
-                _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
+                if (_frmTransactionViewModel.IsNotEnoughMoney(decimal.Parse(numtxtAmmount.Text), _accountId) && _frmTransactionViewModel.IsWithdrawal)
+                {
+                    MessageBox.Show("It's not possible to make withdrawal, there is not enough money.");
+                }
+                else
+                {
+                    _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
+                    _frmTransactionViewModel.AddTransaction(_accountId);
+                }
+                
             }
             else
             {
-                _frmTransactionViewModel.AccountOfRecipient = txtRecipientAccount.Text;
-                _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
-                _frmTransactionViewModel.Vs = int.Parse(numtxtVS.Text);
-                _frmTransactionViewModel.Ss = txtSS.Text;
-                _frmTransactionViewModel.Ks = int.Parse(numtxtKS.Text);
-                _frmTransactionViewModel.MessageForRecipient = txtMessageForRecipient.Text;
+                if (_frmTransactionViewModel.IsNotEnoughMoney(decimal.Parse(numtxtAmmount.Text), _accountId))
+                {
+                    MessageBox.Show("It's not possible to make transaction, there is not enough money.");
+                }
+                else
+                {
+                    _frmTransactionViewModel.AccountOfRecipient = txtRecipientAccount.Text;
+                    _frmTransactionViewModel.Ammount = decimal.Parse(numtxtAmmount.Text);
+                    _frmTransactionViewModel.Vs = int.Parse(numtxtVS.Text);
+                    _frmTransactionViewModel.Ss = txtSS.Text;
+                    _frmTransactionViewModel.Ks = int.Parse(numtxtKS.Text);
+                    _frmTransactionViewModel.MessageForRecipient = txtMessageForRecipient.Text;
+                    _frmTransactionViewModel.AddTransaction(_accountId);
+                }
             }
-
-            _frmTransactionViewModel.AddTransaction(_accountId);
             Close();
         }
 

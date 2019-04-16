@@ -8,6 +8,9 @@ using Data.Repositories;
 
 namespace TransformerBank
 {
+    /// <summary>
+    /// Trieda na pozadi bankomatu, ktora pre neho validuje login
+    /// </summary>
     public class LoginValidator
     {
         private CardRepository _cardRepository;

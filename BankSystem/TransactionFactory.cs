@@ -7,8 +7,21 @@ using Data.Models;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// staticka trieda na vyrobu transakcii
+    /// </summary>
     public static class TransactionFactory
     {
+        /// <summary>
+        /// Trieda, ktora z udajov v parametroch zostavi a vrati transakciu prevod na iny ucet
+        /// </summary>
+        /// <param name="ammount"></param>
+        /// <param name="accountOfRecipient"></param>
+        /// <param name="vs"></param>
+        /// <param name="ks"></param>
+        /// <param name="ss"></param>
+        /// <param name="messageForRecipient"></param>
+        /// <returns></returns>
         public static Transaction CreateTransaction(decimal ammount, string accountOfRecipient, int vs, int ks, string ss, string messageForRecipient)
         {
             Transaction transaction = new Transaction();
@@ -24,6 +37,12 @@ namespace BankSystem
             return transaction;
         }
 
+        /// <summary>
+        /// Trieda, ktora z udajov v parametroch zostavi a vrati transakcie vyber a vklad
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="transactionType"></param>
+        /// <returns></returns>
         public static Transaction CreateTransaction(decimal amount, string transactionType)
         {
             Transaction transaction = new Transaction();

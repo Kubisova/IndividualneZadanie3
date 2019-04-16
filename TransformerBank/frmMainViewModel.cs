@@ -8,6 +8,9 @@ using Data.Repositories;
 
 namespace TransformerBank
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmMainViewModel
     {
         private TransactionRepository _transactionRepository;

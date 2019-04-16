@@ -9,14 +9,25 @@ using System.Data;
 
 namespace Data.Repositories
 {
+    static class Constants
+    {
+        public const string CONNECTION_STRING = @"Server = DESKTOP-GKFDQEI\SQLEXPRESS; Database = TransformerBankDb;Trusted_Connection = true";
+
+        //home
+        //public const string CONNECTION_STRING = @"Server = DESKTOP - GKFDQEI\SQLEXPRESS; Database = TransformerBankDb;Trusted_Connection = true";
+        //work
+        //public const string CONNECTION_STRING = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
+    }
     public class AccountRepository
     {
-        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
-
+        /// <summary>
+        /// Metoda, ktora vrati z databazy karty s klientami
+        /// </summary>
+        /// <returns></returns>
         public List<Account> GetAccounts()
         {
             List<Account> accounts = new List<Account>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -51,14 +62,17 @@ namespace Data.Repositories
                     }
                 }
             }
-
             return accounts;
         }
 
+        /// <summary>
+        /// Metoda, ktora prida ucet do databazy (aj s klientom a kartami)
+        /// </summary>
+        /// <param name="account"></param>
         public void AddAccount(Account account)
         {
             bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 int id;
                 int accountId;
@@ -120,18 +134,19 @@ namespace Data.Repositories
                         command.Parameters.Add("@cardId", SqlDbType.Int).Value = cardId;
 
                         success = (command.ExecuteNonQuery() > 0);
-
                     }
-
                 }
-
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vykona edit uctu v databaze
+        /// </summary>
+        /// <param name="account"></param>
         public void EditAccount(Account account)
         {
             //bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -176,11 +191,15 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vracia ucty s udajmi pre datagrid
+        /// </summary>
+        /// <returns></returns>
         public List<AccountView> GetAccountsForView()
         {
 
             List<AccountView> accounts = new List<AccountView>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -211,15 +230,19 @@ namespace Data.Repositories
                     }
                 }
             }
-
             return accounts;
         }
 
+        /// <summary>
+        /// Metoda, ktora vracia ucet pre strucny prehlad 
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public List<AccountView> GetAccountForShortView(int accountId)
         {
 
             AccountView account = new AccountView();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -250,10 +273,15 @@ namespace Data.Repositories
             return accounts;
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy ofiltrovane udaje udaje podla filtra v parametroch
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public List<AccountView> GetFilteredAccountsForView(string filter)
         {
             List<AccountView> accounts = new List<AccountView>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -289,14 +317,18 @@ namespace Data.Repositories
                     }
                 }
             }
-
             return accounts;
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy ucet podla Id
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public Account GetAccountById(int accountId)
         {
             Account account = new Account();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -330,13 +362,16 @@ namespace Data.Repositories
                     }
                 }
             }
-
             return account;
         }
 
+        /// <summary>
+        /// Metoda, ktora zrusi ucet
+        /// </summary>
+        /// <param name="accountId"></param>
         public void CloseAccount(int accountId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -352,10 +387,15 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda ktora vrati z databazy ofiltrovane ucty 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public List<Account> GetFilteredAccounts(string filter)
         {
             List<Account> accounts = new List<Account>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -397,9 +437,14 @@ namespace Data.Repositories
             return accounts;
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy Id uctu podla cisla karty
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public int GetAccountIdByCardNumber(int cardNumber)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -419,9 +464,14 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy zostatok uctu podla cila karty
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public decimal GetAccounBalanceByCardNumber(int cardNumber)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -440,5 +490,64 @@ namespace Data.Repositories
                 }
             }
         }
+
+        /// <summary>
+        /// Metoda, ktora ziska udaje pre prehlad zalozenych uctov po mesiacoch
+        /// </summary>
+        /// <returns></returns>
+        public DataSet GetEstablAccountsMonthly()
+        {
+            SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING);
+            string command = @"select count(*) as 'Count of established accounts', (datename(month, (EstablishDate))) as Month
+                               from Account
+                               where EstablishDate between dateadd(month,-6, GETDATE()) and  GETDATE()
+                               group by (datename(month, (EstablishDate)))
+                               order by count(*) desc";
+
+            DataSet ds = new DataSet();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command, connection))
+            {
+                adapter.Fill(ds, "EstablishedAccounts");
+            }
+            return ds;
+        }
+
+        /// <summary>
+        /// Metoda, ktora vrati z databazy pocet aktivnych uctov
+        /// </summary>
+        /// <returns></returns>
+        public int GetActiveAccountsCount()
+        {
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"select count(*) from account where CancelDate is null";
+                                        
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Metoda, ktora vrati z databazy udaj pre prehlad o prostriedkoch klientov banky
+        /// </summary>
+        /// <returns></returns>
+        public decimal GetFunds()
+        {
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"select sum(AccountBalance) from account";
+
+                    return (decimal)command.ExecuteScalar();
+                }
+            }
+        }
+
+
     }
 }

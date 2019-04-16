@@ -7,17 +7,20 @@ using Data.Models;
 using System.Data.SqlClient;
 using System.Data;
 
+
 namespace Data.Repositories
 {
     public class CardRepository
     {
-        public string connectionString = @"Server = kubisova\sql2014; Database = TransformerBankDb;Trusted_Connection = true";
-
+        /// <summary>
+        /// Metoda, ktora vrati posledne vydane cislo karty
+        /// </summary>
+        /// <returns></returns>
         public int GetLastIssuedCardNumber()
         {
             int maxCardNumber;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 
                 connection.Open();
@@ -35,17 +38,20 @@ namespace Data.Repositories
                             maxCardNumber = 0;
                         }
                     }
-
                     return maxCardNumber;
                 }
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy posledny vydany pin
+        /// </summary>
+        /// <returns></returns>
         public int GetLastIssuedCardPin()
         {
             int maxCardPin;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -62,16 +68,20 @@ namespace Data.Repositories
                             maxCardPin = 0;
                         }
                     }
-
                     return maxCardPin;
                 }       
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora prida kartu do databazy
+        /// </summary>
+        /// <param name="card"></param>
+        /// <param name="accountId"></param>
         public void AddNewCard(Card card, int accountId)
         {
             bool success;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 int cardId;
 
@@ -111,10 +121,15 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy karty podla cisla uctu
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public List<Card> GetCardsByAccountId(int accountId)
         {
             List<Card> cards = new List<Card>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -146,11 +161,16 @@ namespace Data.Repositories
             return cards;
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy pin podla cisla karty
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public int GetPinByCardNumber(int cardNumber)
         {
             int pin;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -175,11 +195,16 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy datum zrusenia uctu podla cisla karty
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public DateTime GetAccountCancelDate(int cardNumber)
         {
             DateTime cancelDate;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -210,11 +235,16 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy datum platnosti karty podla cisla karty
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public DateTime GetCardValidityDate(int cardNumber)
         {
             DateTime validityDate;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -223,29 +253,21 @@ namespace Data.Repositories
                     command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
 
                     validityDate = (DateTime)command.ExecuteScalar();
-
-                    //using (SqlDataReader reader = command.ExecuteReader())
-                    //{
-                    //    if (reader.Read())
-                    //    {
-                    //        validityDate = reader.GetDateTime(3);
-                    //    }
-                    //    else
-                    //    {
-                    //        validityDate = dat;
-                    //    }
-                    //}
-
                     return validityDate;
                 }
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora vrati z databazy ci je karta zablokovana
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
         public bool IsCardBlocked(int cardNumber)
         {
             bool isBlocked;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -254,27 +276,18 @@ namespace Data.Repositories
                     command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
 
                     isBlocked = (bool)command.ExecuteScalar();
-
-                    //using (SqlDataReader reader = command.ExecuteReader())
-                    //{
-                    //    if (reader.Read())
-                    //    {
-                    //        validityDate = reader.GetDateTime(3);
-                    //    }
-                    //    else
-                    //    {
-                    //        validityDate = dat;
-                    //    }
-                    //}
-
                     return isBlocked;
                 }
             }
         }
 
+        /// <summary>
+        /// Metoda, ktora nastavi v databaze karu ako zablokovanu
+        /// </summary>
+        /// <param name="cardNumber"></param>
         public void SetCardAsBlocked(int cardNumber)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
             {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand())
@@ -283,6 +296,27 @@ namespace Data.Repositories
 
                     command.Parameters.Add("@cardNumber", SqlDbType.Int).Value = cardNumber;
                     command.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = 1;
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Metoda, ktora este nefunguje, ale v buducnosti nastavi kartu v databaze ako nezablokovanu
+        /// </summary>
+        /// <param name="accountId"></param>
+        public void SetCardAsNotBlocked(int accountId)
+        {
+            using (SqlConnection connection = new SqlConnection(Constants.CONNECTION_STRING))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"update Card set IsBlocked = @isBlocked where  ....";
+
+                    command.Parameters.Add("@accountId", SqlDbType.Int).Value = accountId;
+                    command.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = 0;
 
                     command.ExecuteNonQuery();
                 }

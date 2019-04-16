@@ -35,8 +35,6 @@ namespace BankSystem
 
             dGVCards.DataSource = _frmClientManagementViewModel.GetCards(accountId);
             dGVCards.Columns[0].Visible = false;
-
-           
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
@@ -58,18 +56,35 @@ namespace BankSystem
 
         private void cmdDeposit_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), $"deposit", _accountId))
+            if (_frmClientManagementViewModel.IsAccountOpen(_accountId))
             {
-                newForm.ShowDialog();
+                using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), $"deposit", _accountId))
+                {
+                    newForm.ShowDialog();
+                }
             }
+            else
+            {
+                MessageBox.Show("It's not possible to make deposit, the account is canceled");
+            }
+            
         }
 
         private void cmdWithdrawal_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), $"withdrawal", _accountId))
+            if (_frmClientManagementViewModel.IsAccountOpen(_accountId))
             {
-                newForm.ShowDialog();
+                using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), $"withdrawal", _accountId))
+                {
+                    newForm.ShowDialog();
+                }
             }
+            else
+            {
+                MessageBox.Show("It's not possible to make withdrawal, the account is canceled");
+            }
+
+            
         }
 
         private void cmdAllTransactions_Click(object sender, EventArgs e)
@@ -82,20 +97,34 @@ namespace BankSystem
 
         private void cmdNewTransaction_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), _accountId))
+            if (_frmClientManagementViewModel.IsAccountOpen(_accountId))
             {
-                newForm.ShowDialog();
+                using (frmTransaction newForm = new frmTransaction(new FrmTransactionViewModel(), _accountId))
+                {
+                    newForm.ShowDialog();
+                }
             }
+            else
+            {
+                MessageBox.Show("It's not possible to make new transaction, the account is canceled");
+            }
+            
         }
 
         private void cmdCloseAccount_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Close the account?", "Close Account", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (_frmClientManagementViewModel.IsAccountOpen(_accountId))
             {
-                _frmClientManagementViewModel.CloseAccount(_accountId);
-                //DialogResult = DialogResult.OK;
-
+                if (MessageBox.Show("Close the account?", "Close Account", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    _frmClientManagementViewModel.CloseAccount(_accountId);
+                }
             }
+            else
+            {
+                MessageBox.Show("The account is already closed.");
+            }
+            
         }
 
         private void btnAddNewCard_Click(object sender, EventArgs e)
@@ -103,6 +132,7 @@ namespace BankSystem
             if (_frmClientManagementViewModel.IsAccountOpen(_accountId))
             {
                 _frmClientManagementViewModel.AddNewCard(_accountId);
+                MessageBox.Show("The card was added");
             }
             else
             {
@@ -128,6 +158,16 @@ namespace BankSystem
             dGVShortAccountInfo.Columns[8].Visible = false;
             dGVShortAccountInfo.Columns[11].Visible = false;
             dGVShortAccountInfo.Columns[12].Visible = false;
+        }
+
+        private void btnUnblockBlockedCard_Click(object sender, EventArgs e)
+        {
+            if (dGVCards.CurrentRow != null)
+            {
+                int index = dGVCards.CurrentRow.Index;
+                MessageBox.Show("Not implemented");
+                //_frmClientManagementViewModel.UnblockBlockedCard(_accountId);
+            }
         }
     }
 }

@@ -8,6 +8,9 @@ using Data.Models;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// Pomocna trieda za formularom, ktora z neho zbiera data a posiela mu data z databazy
+    /// </summary>
     public class FrmAccountViewModel
     {
         public string AccountName { get; set; }

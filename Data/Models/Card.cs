@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
+    /// <summary>
+    /// Trieda reprezentujuca kartu
+    /// </summary>
     public class Card
     {
         public int CardId { get; set; }

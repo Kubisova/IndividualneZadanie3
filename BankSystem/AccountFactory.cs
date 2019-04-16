@@ -8,8 +8,15 @@ using Data.Repositories;
 
 namespace BankSystem
 {
+    /// <summary>
+    /// Staticka trieda, ktora vyraba a vracia ucty
+    /// </summary>
     public static class AccountFactory
     {
+        /// <summary>
+        /// Metoda, ktora zostavi a vrati ucet s nastavenym klientom
+        /// </summary>
+        /// <returns></returns>
         public static Account CreateAccount()
         {
             Account account = new Account();
@@ -19,6 +26,15 @@ namespace BankSystem
             return account;
         }
 
+        /// <summary>
+        /// Metoda, ktora vytvori a vrati ucet aj s objektom klient a kartami
+        /// </summary>
+        /// <param name="accountName"></param>
+        /// <param name="iban"></param>
+        /// <param name="overdraftLimit"></param>
+        /// <param name="cardsCount"></param>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public static Account CreateAccount(string accountName,string iban, decimal overdraftLimit, int cardsCount, Client client)
         {
             Account account = new Account();
@@ -34,6 +50,11 @@ namespace BankSystem
             return account;
         }
 
+        /// <summary>
+        /// Metoda, ktora vyrobi karty pre metodu, kotra vyraba ucty
+        /// </summary>
+        /// <param name="cardsCount"></param>
+        /// <returns></returns>
         public static List<Card> CreateCards(int cardsCount)
         {
             CardRepository cardRepository = new CardRepository();
@@ -63,6 +84,10 @@ namespace BankSystem
             return cards;
         }
 
+        /// <summary>
+        /// Metoda, ktora vyrobi len jednu kartu
+        /// </summary>
+        /// <returns></returns>
         public static Card CreateCard()
         {
             CardRepository cardRepository = new CardRepository();

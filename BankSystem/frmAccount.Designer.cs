@@ -274,6 +274,7 @@
             // 
             this.numtxtOverdraftLimit.Location = new System.Drawing.Point(28, 174);
             this.numtxtOverdraftLimit.Name = "numtxtOverdraftLimit";
+            this.numtxtOverdraftLimit.ReadOnly = true;
             this.numtxtOverdraftLimit.Size = new System.Drawing.Size(100, 20);
             this.numtxtOverdraftLimit.TabIndex = 28;
             this.numtxtOverdraftLimit.Text = "0";
@@ -317,7 +318,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 312);
+            this.ClientSize = new System.Drawing.Size(723, 312);
             this.Controls.Add(this.txtAccountName);
             this.Controls.Add(this.numtxtCardsCount);
             this.Controls.Add(this.lblCardsCount);
@@ -346,6 +347,8 @@
             this.Controls.Add(this.lblIban);
             this.Controls.Add(this.lblClientInfo);
             this.Controls.Add(this.lblAccount);
+            this.MaximumSize = new System.Drawing.Size(739, 351);
+            this.MinimumSize = new System.Drawing.Size(739, 351);
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAccount";
